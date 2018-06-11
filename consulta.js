@@ -7,7 +7,7 @@ btnPesquisar.addEventListener( 'click' , function(){
     let name = document.getElementById( 'nome-usuario' ).value;
     urlRepo = 'https://api.github.com/users/' + name + '/repos';
     document.getElementById( 'nome-usuario' ).value = '';
-    consultaApiRep( urlRepo );
+    consulta( urlRepo );
 });
 
 btnLimpar.addEventListener( 'click' ,function(){
@@ -15,7 +15,7 @@ btnLimpar.addEventListener( 'click' ,function(){
     tabela.innerHTML = '';
 });
 
-function consultaApiRep( url ){
+var consulta = function consultaApiRep( url ){
     axios.get(url, {})
         .then(response => {
             let repositorios = response.data;
@@ -23,13 +23,13 @@ function consultaApiRep( url ){
             for(let rep of repositorios){
                 cont += 1;
                 tabela.innerHTML += "<tr>"+
-                                        "<td>"+cont+"</td>"+
+                                        "<td>"+ cont +"</td>"+
                                         "<td>"+ rep.id +"</td>"+
                                         "<td>"+ rep.name +"</td>"+
                                         "<td>"+ rep.forks_count +"</td>"+
-                                        "<td>"+rep.watchers+"</td>"+
-                                        "<td>"+ rep.stargazers_count+"</td>"+
-                                        "<td>"+ rep.clone_url+"</td>"+
+                                        "<td>"+ rep.watchers +"</td>"+
+                                        "<td>"+ rep.stargazers_count +"</td>"+
+                                        "<td>"+ rep.clone_url +"</td>"+
                                     "</tr>";
             }
         })
